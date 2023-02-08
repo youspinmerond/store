@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Header from "./Header"
+import styles from 'styles/Home.module.sass'
 
 export default function Layout({children}:any) {
   return (
@@ -10,8 +11,10 @@ export default function Layout({children}:any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header/>
-      {children}
+      <main className={styles.main}>
+        <Header/>
+        {children}
+      </main>
     </>
   )
 }
