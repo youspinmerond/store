@@ -1,7 +1,6 @@
 import styles from 'styles/auth.module.sass'
 
 export default function Register() {
-  
   function onSubmit(e:any) {
     e.preventDefault()
 
@@ -44,4 +43,18 @@ export default function Register() {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps({req}:any) {
+  
+  const a = await fetch("http://localhost:3000/api/auth", {
+    headers: {
+      Cookie: req.headers.cookie
+    }
+  })
+  // console.log(a)
+    
+  return {
+    props:{}
+  }
 }
