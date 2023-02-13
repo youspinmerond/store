@@ -1,4 +1,5 @@
 import notVerefiedOrders from '@/actions/checkNotVerefiedOrders'
+import createProduct from '@/actions/createProduct'
 
 import styles from 'styles/admin.module.sass'
 interface AdminObj {
@@ -13,7 +14,21 @@ interface AdminObj {
   orders:any
 }
 export default function Admin({response, orders}:AdminObj) {
-  
+  async function onSubmit(e:any) {
+    e.preventDefault()
+    const body:any = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      category: e.target.category.value,
+      price: parseInt(e.target.price.value),
+      current: e.target.current.value
+    }
+    const res = await fetch("http://localhost:3000/api/createProduct", {
+      method: "POST",
+      body: JSON.stringify(body)
+    })
+    console.log(res)
+  }
   if(response.approved)
   {
     return (
@@ -36,11 +51,10 @@ export default function Admin({response, orders}:AdminObj) {
                 <td>City</td>
                 <td>Address</td>
                 <td>Verefied</td>
-                <td>ProductId</td>
-                <td>Product Info</td>
+                <td>ProductsId</td>
               </tr>
               {
-                orders.map(order => (
+                orders.map((order:any) => (
                   <tr key={order.id}>
                     <td>{order.id}</td>
                     <td>{order.fullname}</td>
@@ -48,29 +62,7 @@ export default function Admin({response, orders}:AdminObj) {
                     <td>{order.city}</td>
                     <td>{order.address}</td>
                     <td><b>{order.verefied ? 'yes' : 'no'}</b></td>
-                    <td>{order.product_id}</td>
-                    <td>
-                      <table border={1} cellPadding={0} cellSpacing={0}>
-                        <tbody>
-                          <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Description</td>
-                            <td>Category</td>
-                            <td>Price</td>
-                            <td>Current</td>
-                          </tr>
-                          <tr>
-                            <td>{order.product.id}</td>
-                            <td>{order.product.name}</td>
-                            <td>{order.product.description}</td>
-                            <td>{order.product.category}</td>
-                            <td>{order.product.price}</td>
-                            <td>{order.product.current}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
+                    <td>{order.products_id.join(", ")}</td>
                   </tr>
                 ))
               }
@@ -79,12 +71,12 @@ export default function Admin({response, orders}:AdminObj) {
         </div>
         <div className={styles.square}>
           <div className={styles.squareTitle}>Create Product</div>
-          <form>
-            <input name="name" className={styles.input} type="text" placeholder='Name'/>
-            <input name="description" className={styles.input} type="text" placeholder='Description'/>
-            <input name="category" className={styles.input} type="text" placeholder='Category'/>
-            <input name="price" className={styles.input} type="text" placeholder='Price'/>
-            <input name="current" className={styles.input} type="text" placeholder='Current'/>
+          <form method='post' onSubmit={(e) => onSubmit(e)}>
+            <input required minLength={5} name="name" className={styles.input} type="text" placeholder='Name'/>
+            <input required minLength={20} name="description" className={styles.input} type="text" placeholder='Description'/>
+            <input required minLength={2} name="category" className={styles.input} type="text" placeholder='Category'/>
+            <input required minLength={1} name="price" className={styles.input} type="text" placeholder='Price'/>
+            <input required minLength={1} name="current" className={styles.input} type="text" placeholder='Current'/>
             <input className={styles.input} type="submit" value="Create Product"/>
           </form>
         </div>

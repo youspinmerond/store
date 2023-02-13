@@ -8,7 +8,7 @@ interface Moderator {
   verefied: 0
 }
 
-export default async function createProduct({nickname, fullname, password, verefied}:Moderator)
+export default async function createModerator({nickname, fullname, password, verefied}:Moderator)
 {
   const moderator = await prisma.moderators.create({
     data: {
