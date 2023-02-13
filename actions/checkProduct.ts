@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
-export default async function createProduct(id:number)
+export default async function checkProduct(id:number)
 {
   const product = await prisma.product.findUnique({
     where:{
