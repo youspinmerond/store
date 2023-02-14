@@ -13,3 +13,24 @@ TODO
 * * API
 * * Admin-page
 * * Finish
+
+
+How to start it?
+================
+
+* create config.json, specify data as config.json.example.
+* create .env, similar as above.
+* create database, specify it in prisma schema, after this
+* * prisma generate
+* * prisma migrate init
+* npm run dev
+
+Technologies
+============
+
+* Prisma
+* React
+* NextJS
+* ESLint
+* TypeScript
+* SASS

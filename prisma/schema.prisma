@@ -21,10 +21,10 @@ model Product {
 
 model Moderators {
   id Int @id @default(autoincrement())
-  nickname String
+  nickname String @unique
   fullname String
   verefied Int
-  password String
+  password String @unique
 }
 
 model Orders {

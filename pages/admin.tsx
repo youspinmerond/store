@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import notVerefiedOrders from '@/actions/checkNotVerefiedOrders'
 import createProduct from '@/actions/createProduct'
 
@@ -14,6 +15,7 @@ interface AdminObj {
   orders:any
 }
 export default function Admin({response, orders}:AdminObj) {
+
   async function onSubmit(e:any) {
     e.preventDefault()
     const body:any = {
@@ -29,11 +31,13 @@ export default function Admin({response, orders}:AdminObj) {
     })
     console.log(res)
   }
-  if(response.approved)
+  if(response.approved && response.moderator)
   {
     return (
       <div>
         <h1>Admin Page</h1>
+        <Link href="/" style={{color:'#fff', fontSize:"1.5rem", margin:"0 0 1rem", display:"block"}}>To Main Page</Link>
+        
         <div className={styles.square}>
           <span className={styles.squareTitle}>Profile</span>
           <p>You&apos;re logged as <b>{response.moderator.nickname}</b></p>
@@ -54,6 +58,7 @@ export default function Admin({response, orders}:AdminObj) {
                 <td>ProductsId</td>
               </tr>
               {
+                orders.length > 0 ?
                 orders.map((order:any) => (
                   <tr key={order.id}>
                     <td>{order.id}</td>
@@ -65,6 +70,13 @@ export default function Admin({response, orders}:AdminObj) {
                     <td>{order.products_id.join(", ")}</td>
                   </tr>
                 ))
+                :
+                <tr>
+                  <td>You</td>
+                  <td>Happy</td>
+                  <td>No</td>
+                  <td>Orders</td>
+                </tr>
               }
             </tbody>
           </table>

@@ -1,5 +1,5 @@
+import Product from './Product'
 import styles from 'styles/products.module.sass'
-
 
 interface productObj {
   id: number
@@ -26,13 +26,7 @@ export default function Products(list:listObj) {
       <div className={styles.list}>
         {
           products.map((product:productObj) => (
-            <div key={product.id} className={styles.product}>
-              <div className="id" style={{display:"none"}}>{product.id}</div>
-              <div className={styles.name}>{product.name}</div>
-              <div className="description">{product.description}</div>
-              <div className="price">{product.price}{product.current}</div>
-              <input type="submit" value="Order"/>
-            </div>
+            <Product key={product.id} product={product}/>
           ))
         }
       </div>
