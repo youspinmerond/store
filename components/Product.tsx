@@ -9,10 +9,10 @@ interface productObj {
     price: number
     current: string
   }
-  key: number
+  basket: any
 }
 
-export default function Product({product, key}:productObj) {
+export default function Product({product, basket}:productObj) {
   const [count, setCount] = useState(1)
 
   function increase(num:number) {
@@ -24,19 +24,23 @@ export default function Product({product, key}:productObj) {
     setCount(count-num)
   }
 
+  function orderProduct() {
+    basket[1]((prev:any) => prev.concat({product:product, count: count, key:prev.length}))
+  }
+
   return (
-    <div key={key} className={styles.product}>
+    <div className={styles.product}>
       <div className="id" style={{display:"none"}}>{product.id}</div>
       <div className={styles.name}>{product.name}</div>
       <div className="description">{product.description}</div>
       <div className="price">{product.price}{product.current}</div>
       <div className={styles.productBottom}>
-        <input type="submit" value="Order"/>
-        <div className="right">
+        <input type="submit" value="Order" onClick={() => orderProduct()}/>
+        <div className={styles.productBottomRight}>
 
-          <input type="button" value="Less" onClick={() => reduce(1)}/>
+          <input type="button" className={styles.productBottomButton} value="-" onClick={() => reduce(1)}/>
           {count}
-          <input type="button" value="More" onClick={() => increase(1)} />
+          <input type="button" className={styles.productBottomButton} value="+" onClick={() => increase(1)} />
         </div>
       </div>
     </div>

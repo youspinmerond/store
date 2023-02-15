@@ -1,13 +1,15 @@
 import Header from 'components/Header'
 import Products from 'components/Products'
 import styles from '@/styles/Home.module.sass'
+import { useState } from 'react'
 
 export default function Home(list:any) {
+  let basket = useState([])
   return (
     <>
       <main className={styles.main}>
-        <Header/>
-        <Products list={list} />
+        <Header basket={basket[0]}/>
+        <Products list={list} basket={basket} />
       </main>
     </>
   )

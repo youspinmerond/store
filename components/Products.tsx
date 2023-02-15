@@ -1,5 +1,6 @@
 import Product from './Product'
 import styles from 'styles/products.module.sass'
+import { useState } from 'react'
 
 interface productObj {
   id: number
@@ -8,7 +9,7 @@ interface productObj {
   price: number
   current: string
 }
-interface listObj {
+interface productsObj {
   list: {
     list: {
       products: {
@@ -16,17 +17,20 @@ interface listObj {
       }
     }
   }
+  basket:any
 }
 
-export default function Products(list:listObj) {
-  const products = list.list.list.products.products
+export default function Products({list, basket}:productsObj) {
+  const products = list.list.products.products
   return (
     <div>
       <h1>Product&apos;s list</h1>
       <div className={styles.list}>
         {
           products.map((product:productObj) => (
-            <Product key={product.id} product={product}/>
+            <div key={product.id}>
+              <Product product={product} basket={basket}/>
+            </div>
           ))
         }
       </div>

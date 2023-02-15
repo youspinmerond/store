@@ -1,16 +1,79 @@
 import Image from 'next/image'
 import styles from 'styles/header.module.sass'
-import basket from 'images/basket.svg'
+import basketImg from 'images/basket.svg'
+import { useState } from 'react'
 
 type NavObj = {
-  count: number
+  basket: any
 }
-export default function Navigation({count}:NavObj) {
+
+interface Order {
+  fullname: string
+  description?: string
+  phone: string
+  city: string
+  address?: string
+  verefied?: boolean
+  moderator_id?: number
+  products_id: number
+}
+
+export default function Navigation({basket}:NavObj) {
+  function createOrder(elem:any) {
+    elem.preventDefault()
+
+    const body:Order = {
+      fullname: elem.target.fullname.value,
+      phone: elem.target.phone.value[0] === "+" ? elem.target.phone.value.slice(1) : elem.target.phone.value,
+      city: elem.target?.city.value,
+      address: elem.target.address.value,
+      products_id: basket[0].product.id
+    }
+    fetch('http://localhost:3000/api/createOrder', {
+      method: "POST",
+      body: JSON.stringify(body)
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+  }
+  let [showBasket, setShowBasket] = useState<boolean>(false)
+
+  function Basket() {
+    return (
+      <div className={styles.basketMenu}>
+        <h1>Basket</h1>
+        {
+        basket.map((product:any) => (
+          <div className={styles.basketElem} key={product.product.key}>
+            <div className="name">{product.product.name}</div>
+            <div className="count">{product.count}</div>
+          </div>
+        ))
+        }
+        <div>
+          <form onSubmit={(e:any) => createOrder(e)}>
+            <input name="fullname" placeholder="your name" type="text" required/><span style={{color:"red"}}>*</span>
+            <input name="phone" placeholder="your phone number" type="text" minLength={12} required/><span style={{color:"red"}}>*</span>
+            <input name="city" placeholder="your city" type="text" /><span style={{color:"red"}}>*</span>
+            <input name="address" placeholder="your address" type="text" />
+            <input type="submit" value="order" style={{display:"block"}}/>
+          </form>
+        </div>
+      </div>
+    )
+  }
   return (
     <nav>
       <div className={styles.basket}>
-        <Image src={basket} alt="basket" width={24} height={24}/>
-        <span className="count">{count}</span>
+        {showBasket ? <Basket/> : null}
+        {
+          basket.length ?
+          <>
+            <Image src={basketImg} alt="basket" width={20} height={14} onClick={() => setShowBasket(!showBasket)}/>
+            <span className="count">{basket.length}</span>
+          </>
+          : null
+        }
       </div>
     </nav>
   )

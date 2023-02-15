@@ -10,9 +10,10 @@ TODO
 
 * Store
 * * Basket
-* * API
+* * ~~API~~
 * * Admin-page
 * * Finish
+* * Styles ( main purpose now )
 
 
 How to start it?

@@ -2,13 +2,13 @@ import Navigation from "./Navigation"
 import styles from 'styles/header.module.sass'
 
 type HeaderObj = {
-  count?: number
+  basket: any
 }
-export default function Header({count=0}:HeaderObj) {
+export default function Header({basket}:HeaderObj) {
   return (
     <header className={styles.header}>
       <div className="logo">Store</div>
-      <Navigation count={count}/>
+      <Navigation basket={basket}/>
     </header>
   )
 }

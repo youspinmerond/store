@@ -25,7 +25,7 @@ export default async function handler(req:any,res:any) {
 
     createOrder(body)
       .then(order => {
-        res.status(200).json({order:order})
+        res.status(201).json({order:order})
       })
   } catch (e) {
     console.log(e)
