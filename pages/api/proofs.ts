@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from "next"
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
-export default async function handler(req:any,res:any) {
+export default async function handler(req:NextApiRequest,res:NextApiResponse) {
   const cookies = req.cookies
 
   if(!cookies.password) return res.status(403).json({approved: false})

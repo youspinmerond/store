@@ -12,8 +12,8 @@ TODO
 * * Basket
 * * ~~API~~
 * * Admin-page
-* * Finish
 * * Styles ( main purpose now )
+* * Finish
 
 
 How to start it?

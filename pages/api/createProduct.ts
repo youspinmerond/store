@@ -16,7 +16,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
   if(req.body === '') return res.status(400).json({message:"You're sent empty request body."})
   
   
-  const body = JSON.parse(JSON.parse(JSON.stringify(req.body).replace(/(?:\\[rn])+/g, '')))
+  const body:Product = JSON.parse(JSON.parse(JSON.stringify(req.body).replace(/(?:\\[rn])+/g, '')))
 
   if(!body.passwordAdmin) return res.status(403).json({message:"Access denied. You're didn't sent password."})
   const moderator = await checkModerator({password:body.passwordAdmin})

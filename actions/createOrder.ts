@@ -10,7 +10,7 @@ interface Order {
   address?: string
   verefied?: boolean
   moderator_id?: number
-  products_id: number
+  products_info: string[]
 }
 
 export default async function createOrder(
@@ -21,10 +21,10 @@ export default async function createOrder(
     address="",
     verefied=false,
     moderator_id=0,
-    products_id
+    products_info
   }:Order)
 {
-  console.log([fullname, phone, city, address, verefied, moderator_id, products_id])
+  console.log([fullname, phone, city, address, verefied, moderator_id, products_info])
 
   const order = await prisma.orders.create({
     data: {
@@ -35,7 +35,7 @@ export default async function createOrder(
       address: address,
       verefied: verefied,
       moderator_id: moderator_id,
-      products_id: products_id
+      products_info: products_info
     }
   })
   return {...order}

@@ -15,7 +15,7 @@ interface Order {
   address?: string
   verefied?: boolean
   moderator_id?: number
-  products_id: number
+  products_info: string[]
 }
 
 export default function Navigation({basket}:NavObj) {
@@ -27,7 +27,7 @@ export default function Navigation({basket}:NavObj) {
       phone: elem.target.phone.value[0] === "+" ? elem.target.phone.value.slice(1) : elem.target.phone.value,
       city: elem.target?.city.value,
       address: elem.target.address.value,
-      products_id: basket[0].product.id
+      products_info: elem.target.products.value
     }
     fetch('http://localhost:3000/api/createOrder', {
       method: "POST",
@@ -39,6 +39,7 @@ export default function Navigation({basket}:NavObj) {
   let [showBasket, setShowBasket] = useState<boolean>(false)
 
   function Basket() {
+    const products_info = basket.map((e:any) => `product = ${e.product.name} count = ${e.count}, \n`)
     return (
       <div className={styles.basketMenu}>
         <h1>Basket</h1>
@@ -57,6 +58,7 @@ export default function Navigation({basket}:NavObj) {
             <input name="city" placeholder="your city" type="text" /><span style={{color:"red"}}>*</span>
             <input name="address" placeholder="your address" type="text" />
             <input type="submit" value="order" style={{display:"block"}}/>
+            <input type="text" hidden name="products" value={products_info} />
           </form>
         </div>
       </div>

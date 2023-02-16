@@ -67,7 +67,7 @@ export default function Admin({response, orders}:AdminObj) {
                     <td>{order.city}</td>
                     <td>{order.address}</td>
                     <td><b>{order.verefied ? 'yes' : 'no'}</b></td>
-                    <td>{order.products_id.join(", ")}</td>
+                    <td>{order.products_info.join(", ")}</td>
                   </tr>
                 ))
                 :

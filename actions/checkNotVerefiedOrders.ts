@@ -16,7 +16,7 @@ export default async function notVerefiedOrders()
       city: true,
       address: true,
       verefied: true,
-      products_id: true
+      products_info: true
     }
   })
   const prepareOrders = await Promise.all(orders.map(async e => {

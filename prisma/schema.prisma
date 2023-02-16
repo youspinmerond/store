@@ -36,5 +36,5 @@ model Orders {
   address String
   verefied Boolean
   moderator_id Int
-  products_id Int[]
+  products_info String[]
 }
