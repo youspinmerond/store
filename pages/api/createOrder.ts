@@ -29,7 +29,6 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
         res.status(201).json({order:order})
       })
   } catch (e) {
-    console.log(e)
     res.status(400).json({message:"Problem with your data. Try to remove ',' from last option in JSON, or retype request body."})
   }
   

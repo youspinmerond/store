@@ -1,17 +1,17 @@
 .list
   display: grid
-  grid-template-columns: 1fr 1fr 1fr
+  grid-template-columns: repeat(auto-fit, 14rem)
   gap: 1rem
+  margin: 0 2rem
 
 .product
   border: 2px solid #333
-  max-width: 20rem
+  max-width: 14rem
+  height: 10.5rem
   padding: .5rem
-
-  &>.name
-    font-weight: 900
-    font-size: 1.5rem
-  
+  display: flex
+  flex-direction: column
+  justify-content: space-between
   &Bottom
     display: flex
     align-items: center
@@ -27,3 +27,20 @@
       color: #fff
       cursor: pointer
       width: 2rem
+
+.name
+  font-weight: 400
+  font-size: .8125rem
+  line-height: 1.25rem
+
+.price
+  font-weight: 800
+  font-size: .875rem
+  line-height: 140%
+
+.orderButton
+  border-radius: 1.5rem
+  border: none
+  background: #afa
+  padding: .2rem .5rem
+  font-weight: 800

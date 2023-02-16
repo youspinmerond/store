@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 export default function Home(list:any) {
   let basket = useState([])
-  console.log(typeof basket[0])
   return (
     <>
       <main className={styles.main}>

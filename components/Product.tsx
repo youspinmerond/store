@@ -30,17 +30,23 @@ export default function Product({product, basket}:productObj) {
 
   return (
     <div className={styles.product}>
-      <div className="id" style={{display:"none"}}>{product.id}</div>
-      <div className={styles.name}>{product.name}</div>
-      <div className="description">{product.description}</div>
-      <div className="price">{product.price}{product.current}</div>
-      <div className={styles.productBottom}>
-        <input type="submit" value="Order" onClick={() => orderProduct()}/>
-        <div className={styles.productBottomRight}>
-
-          <input type="button" className={styles.productBottomButton} value="-" onClick={() => reduce(1)}/>
-          {count}
-          <input type="button" className={styles.productBottomButton} value="+" onClick={() => increase(1)} />
+      <div className={styles.productTop}>
+        <div className="id" style={{display:"none"}}>{product.id}</div>
+        <div className={styles.name}>{product.name}</div>
+        <div className="description">{product.description}</div>
+      </div>
+      
+      <div className={styles.productMiddle}>
+        <div className={styles.price}>{product.price}&nbsp;{product.current}</div>
+        <div className={styles.productBottom}>
+          <input type="submit" value="Order" onClick={() => orderProduct()} className={styles.orderButton}/>
+          <div className={styles.productBottomRight}>
+            <input type="button" className={styles.productBottomButton} value="-" onClick={() => reduce(1)}/>
+            <span>
+              {count}
+            </span>
+            <input type="button" className={styles.productBottomButton} value="+" onClick={() => increase(1)} />
+          </div>
         </div>
       </div>
     </div>

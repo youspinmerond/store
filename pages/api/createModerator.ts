@@ -27,7 +27,6 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
         res.status(200).json({message:moderator })
       })
   } catch (e) {
-    console.log(e)
     res.status(400).json({message:"Problem with your data. Try to remove ',' from last option in JSON, or retype request body."})
   }
   

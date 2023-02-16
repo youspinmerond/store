@@ -34,7 +34,6 @@ export default function Navigation({basket}:NavObj) {
       body: JSON.stringify(body)
     })
       .then(res => res.json())
-      .then(res => console.log(res))
   }
   let [showBasket, setShowBasket] = useState<boolean>(false)
 

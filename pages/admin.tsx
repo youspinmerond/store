@@ -14,22 +14,36 @@ interface AdminObj {
   },
   orders:any
 }
+
+interface Product {
+  name: string
+  description: string
+  category: string
+  price: number
+  current: "EUR" | "USD" | "UAH" | "GBP"
+  passwordAdmin: string
+}
+
 export default function Admin({response, orders}:AdminObj) {
 
   async function onSubmit(e:any) {
     e.preventDefault()
-    const body:any = {
+    const body:Product = {
       name: e.target.name.value,
       description: e.target.description.value,
       category: e.target.category.value,
       price: parseInt(e.target.price.value),
-      current: e.target.current.value
+      current: e.target.current.value,
+      passwordAdmin: e.target.password.value
     }
     const res = await fetch("http://localhost:3000/api/createProduct", {
       method: "POST",
       body: JSON.stringify(body)
-    })
-    console.log(res)
+    }).then(response => {
+        response.json()
+        console.log(response)
+        // I STILL WORK HERE
+      })
   }
   if(response.approved && response.moderator)
   {
@@ -89,6 +103,7 @@ export default function Admin({response, orders}:AdminObj) {
             <input required minLength={2} name="category" className={styles.input} type="text" placeholder='Category'/>
             <input required minLength={1} name="price" className={styles.input} type="text" placeholder='Price'/>
             <input required minLength={1} name="current" className={styles.input} type="text" placeholder='Current'/>
+            <input required minLength={12} name="password" className={styles.input} type="password" placeholder='Password'/>
             <input className={styles.input} type="submit" value="Create Product"/>
           </form>
         </div>
