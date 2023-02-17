@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import notVerefiedOrders from '@/actions/checkNotVerefiedOrders'
 import createProduct from '@/actions/createProduct'
+import Orders from '@/components/Orders'
 
 import styles from 'styles/admin.module.sass'
 interface AdminObj {
@@ -12,7 +13,7 @@ interface AdminObj {
       verefied: number
     }
   },
-  orders:any
+  orders: Order[]
 }
 
 interface Product {
@@ -22,6 +23,16 @@ interface Product {
   price: number
   current: "EUR" | "USD" | "UAH" | "GBP"
   passwordAdmin: string
+}
+
+interface Order {
+  id: number
+  fullname: string
+  phone: string
+  city: string
+  address: string
+  verefied: boolean
+  products_info: any
 }
 
 export default function Admin({response, orders}:AdminObj) {
@@ -41,7 +52,6 @@ export default function Admin({response, orders}:AdminObj) {
       body: JSON.stringify(body)
     }).then(response => {
         response.json()
-        console.log(response)
         // I STILL WORK HERE
       })
   }
@@ -73,15 +83,9 @@ export default function Admin({response, orders}:AdminObj) {
               </tr>
               {
                 orders.length > 0 ?
-                orders.map((order:any) => (
+                orders.map((order:Order) => (
                   <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{order.fullname}</td>
-                    <td>{order.phone}</td>
-                    <td>{order.city}</td>
-                    <td>{order.address}</td>
-                    <td><b>{order.verefied ? 'yes' : 'no'}</b></td>
-                    <td>{order.products_info.join(", ")}</td>
+                    <Orders order={order}/>
                   </tr>
                 ))
                 :
