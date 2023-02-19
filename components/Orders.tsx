@@ -1,5 +1,9 @@
-interface Order {
-  order: {
+import { useState } from "react"
+import styles from 'styles/admin.module.sass'
+import Order from "./Order"
+
+interface Orders {
+  orders: {
     id: number
     fullname: string
     phone: string
@@ -7,19 +11,51 @@ interface Order {
     address: string
     verefied: boolean
     products_info: any
-  }
+  }[]
+}
+interface Order {
+  id: number
+  fullname: string
+  phone: string
+  city: string
+  address: string
+  verefied: boolean
+  products_info: any
 }
 
-export default function Orders({order}:Order) {
+export default function Orders({orders}:Orders) {
+
   return (
-    <>
-      <td>{order.id}</td>
-      <td>{order.fullname}</td>
-      <td>{order.phone}</td>
-      <td>{order.city}</td>
-      <td>{order.address}</td>
-      <td><b>{order.verefied ? 'yes' : 'no'}</b></td>
-      <td>{order.products_info.join(", ")}</td>
-    </>
+    <div className={styles.square}>
+      <span className={styles.squareTitle}>Not verefied orders</span>
+      <table border={1} cellPadding={0} cellSpacing={0}>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>FullName</td>
+            <td>Phone number</td>
+            <td>City</td>
+            <td>Address</td>
+            <td>Verefied</td>
+            <td>ProductsId</td>
+          </tr>
+          {
+            orders.length > 0 ?
+            orders.map((order:Order) => (
+              <tr key={order.id}>
+                <Order order={order}/>
+              </tr>
+            ))
+            :
+            <tr>
+              <td>You</td>
+              <td>Happy</td>
+              <td>No</td>
+              <td>Orders</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }

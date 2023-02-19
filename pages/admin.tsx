@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import notVerefiedOrders from '@/actions/checkNotVerefiedOrders'
+import FormCreateProduct from '@/components/FormCreateProduct'
 import createProduct from '@/actions/createProduct'
 import Orders from '@/components/Orders'
 
 import styles from 'styles/admin.module.sass'
+
 interface AdminObj {
   response: {
     approved: boolean
@@ -67,50 +69,10 @@ export default function Admin({response, orders}:AdminObj) {
           <p>You&apos;re logged as <b>{response.moderator.nickname}</b></p>
           <p>Verefied orders count <b>{response.moderator.verefied}</b></p>
         </div>
-        
-        <div className={styles.square}>
-          <span className={styles.squareTitle}>Not verefied orders</span>
-          <table border={1} cellPadding={0} cellSpacing={0}>
-            <tbody>
-              <tr>
-                <td>ID</td>
-                <td>FullName</td>
-                <td>Phone number</td>
-                <td>City</td>
-                <td>Address</td>
-                <td>Verefied</td>
-                <td>ProductsId</td>
-              </tr>
-              {
-                orders.length > 0 ?
-                orders.map((order:Order) => (
-                  <tr key={order.id}>
-                    <Orders order={order}/>
-                  </tr>
-                ))
-                :
-                <tr>
-                  <td>You</td>
-                  <td>Happy</td>
-                  <td>No</td>
-                  <td>Orders</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-        <div className={styles.square}>
-          <div className={styles.squareTitle}>Create Product</div>
-          <form method='post' onSubmit={(e) => onSubmit(e)}>
-            <input required minLength={5} name="name" className={styles.input} type="text" placeholder='Name'/>
-            <input required minLength={20} name="description" className={styles.input} type="text" placeholder='Description'/>
-            <input required minLength={2} name="category" className={styles.input} type="text" placeholder='Category'/>
-            <input required minLength={1} name="price" className={styles.input} type="text" placeholder='Price'/>
-            <input required minLength={1} name="current" className={styles.input} type="text" placeholder='Current'/>
-            <input required minLength={12} name="password" className={styles.input} type="password" placeholder='Password'/>
-            <input className={styles.input} type="submit" value="Create Product"/>
-          </form>
-        </div>
+
+        <Orders orders={orders}/>
+
+        <FormCreateProduct/>
       </div>
     )
   } else {
