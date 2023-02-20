@@ -20,7 +20,7 @@ export default async function handler(req:NextApiRequest,res:NextApiResponse) {
     const body:Order = JSON.parse(JSON.parse(JSON.stringify(req.body).replace(/(?:\\[rn])+/g, '')))
     if(!body.fullname) return res.status(400).json({message:"You're forget to specify \"fullname\" option"})
     if(!body.phone) return res.status(400).json({message:"You're forget to specify \"phone\" option"})
-    if(body.phone.length !== 12) return res.status(400).json({message:"Not enough number in phone number.(have to be 12)"})
+    if(body.phone.length < 12) return res.status(400).json({message:"Not enough number in phone number.(have to be 12 minimum)"})
     if(!body.city) return res.status(400).json({message:"You're forget to specify \"city\" option"})
     if(!body.products_info) return res.status(400).json({message:"You're forget to specify \"products_id\" option"})
 

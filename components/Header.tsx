@@ -15,12 +15,13 @@ interface HeaderObj {
     count: number
     key: number
   }[]
+  showBasket: any
 }
-export default function Header({basket}:HeaderObj):ReactComponentElement<any> {
+export default function Header({basket, showBasket}:HeaderObj):ReactComponentElement<any> {
   return (
     <header className={styles.header}>
       <div className="logo">Store</div>
-      <Navigation basket={basket}/>
+      <Navigation basket={basket} showBasket={showBasket}/>
     </header>
   )
 }
