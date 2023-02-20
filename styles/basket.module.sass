@@ -1,0 +1,76 @@
+@import variables
+  
+.basket
+  display: flex
+  flex-direction: colunmns
+  justify-content: space-between
+  &Menu
+    padding: 2rem
+  &List
+    width: 80%
+  &Elem
+    padding: 1rem
+    border-top: 2px solid #444
+    display: flex
+    justify-content: space-between
+  &Main
+    display: flex
+    justify-content: space-between
+  &ProductCount
+    border-left: 2px solid #444
+    padding: 0 0 0 .5rem
+    margin: 0 0 0 .5rem
+  &Delete
+    background: none
+    color: $gray
+    border: 2px solid $gray
+    border-radius: 50%
+    cursor: pointer
+    padding: .25rem
+    width: 26px
+    height: 26px
+  &Submit
+    display: flex
+    flex-direction: column
+    width: 20%
+    padding: 2rem 1rem
+    background: $background-second
+    &>h2
+      margin: none
+    &>input
+      width: fit-content
+
+
+.formElem
+  &>*
+    display: block
+  &>input
+    border: 1px solid $border
+    border-radius: 4px
+    color: black
+    height: 2.8rem
+    width: 90%
+
+.paypalOrder
+  display: block
+  background: #FFB800
+  color: #232C65
+  font-weight: 600
+  border: none
+  border-radius: 50px
+  padding: 1rem 0
+  margin: .875rem
+  height: 2.8rem
+  width: 15rem
+
+.paymentOrder
+  display: block
+  background: #0156FF
+  color: #fff
+  font-weight: 600
+  border: none
+  border-radius: 50px
+  padding: 1rem 0
+  margin: .875rem
+  height: 2.8rem
+  width: 15rem

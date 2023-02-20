@@ -1,11 +1,13 @@
+@import variables
+
 .list
   display: grid
-  grid-template-columns: repeat(auto-fit, 14rem)
+  grid-template-columns: repeat(auto-fit, 20rem)
   gap: 1rem
   margin: 0 2rem
 
 .product
-  border: 2px solid #333
+  color: $fontColor
   max-width: 14rem
   height: 10.5rem
   padding: .5rem
@@ -24,7 +26,6 @@
       font-weight: 900
       font-size: 1.5rem
       border: none
-      color: #fff
       cursor: pointer
       width: 2rem
 
@@ -41,6 +42,6 @@
 .orderButton
   border-radius: 1.5rem
   border: none
-  background: #afa
+  background: $green
   padding: .2rem .5rem
   font-weight: 800

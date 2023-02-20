@@ -38,25 +38,7 @@ interface Order {
 }
 
 export default function Admin({response, orders}:AdminObj) {
-
-  async function onSubmit(e:any) {
-    e.preventDefault()
-    const body:Product = {
-      name: e.target.name.value,
-      description: e.target.description.value,
-      category: e.target.category.value,
-      price: parseInt(e.target.price.value),
-      current: e.target.current.value,
-      passwordAdmin: e.target.password.value
-    }
-    const res = await fetch("http://localhost:3000/api/createProduct", {
-      method: "POST",
-      body: JSON.stringify(body)
-    }).then(response => {
-        response.json()
-        // I STILL WORK HERE
-      })
-  }
+  
   if(response.approved && response.moderator)
   {
     return (

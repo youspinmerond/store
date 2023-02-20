@@ -1,4 +1,4 @@
-import styles from 'styles/header.module.sass'
+import styles from 'styles/basket.module.sass'
 
 interface Order {
   fullname: string
@@ -39,38 +39,55 @@ export default function Basket({basket}:any) {
 
   return (
     <div className={styles.basketMenu}>
-      <h1>Basket</h1>
-      {
-      basket[0].map((product:any) => (
-        <div className={styles.basketElem} key={product.product.key}>
-          <button className={styles.basketDelete} onClick={() => deleteFromBasket(product)}>X</button>
-          <div className={styles.basketMain}>
-            <div className="name">{product.product.name}</div>
-            <div className={styles.basketProductCount}>{product.count}</div>
-          </div>
-        </div>
-      ))
-      }
-      <div>
+      <h1>Shopping Cart</h1>
+      <div className={styles.basket}>
+        <table className={styles.basketList}>
+          <tbody>
+            <tr>
+              <td>Item</td>
+              <td>Price</td>
+              <td>Qty</td>
+              <td>Subtotal</td>
+              <td>Actions</td>
+            </tr>
+            {
+            basket[0].map((product:any) => (
+              <tr key={product.product.key}>
+                <td>{product.product.name}</td>
+                <td><b>{product.product.price} {product.product.current}</b></td>
+                <td>{product.count}</td>
+                <td><b>{product.product.price*product.count} {product.product.current}</b></td>
+                <td><button className={styles.basketDelete} onClick={() => deleteFromBasket(product)}>X</button></td>
+              </tr>
+            ))
+            }
+          </tbody>
+        </table>
+
         <form onSubmit={(e:any) => createOrder(e)} className={styles.basketSubmit}>
-          <div className="formElem">
+          <h2 style={{fontSize:'1.5rem'}}>Summary</h2>
+          <div className={styles.formElem}>
+            <label>Name<span style={{color:"red"}}>*</span></label>
             <input name="fullname" placeholder="your name" type="text" required/>
-            <span style={{color:"red"}}>*</span>
           </div>
           
-          <div className="formElem">
-          <input name="phone" placeholder="your phone number" type="text" minLength={12} required/>
-          <span style={{color:"red"}}>*</span>
+          <div className={styles.formElem}>
+            <label>Phone<span style={{color:"red"}}>*</span></label>
+            <input name="phone" placeholder="your phone number" type="text" minLength={12} required/>
           </div>
           
-          <div className="formElem">
+          <div className={styles.formElem}>
+            <label>City<span style={{color:"red"}}>*</span></label>
             <input name="city" placeholder="your city" type="text" />
-            <span style={{color:"red"}}>*</span>
           </div>
-          <div className="formElem">
+          <div className={styles.formElem}>
+            <label>Address</label>
             <input name="address" placeholder="your address" type="text" />
           </div>
-          <input type="submit" value="order" style={{display:"block"}}/>
+          <div className="submit">
+            <input type="submit" value="Pay on place" className={styles.paymentOrder}/>
+            <input type="submit" value="PayPal" className={styles.paypalOrder}/>
+          </div>
           <input type="text" hidden name="products" value={products_info} />
         </form>
       </div>
