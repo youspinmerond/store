@@ -9,11 +9,12 @@ TODO
 ====
 
 * Store
-* * Basket
+* * ~~Basket~~
 * * ~~API~~
-* * Admin-page
-* * Styles ( main purpose now )
-* * Finish
+* * ~~Admin-page~~
+* * Styles
+* * ~~Finish~~
+* * Bugs fixing
 
 
 How to start it?

@@ -44,7 +44,7 @@ export default function Admin({response, orders}:AdminObj) {
     return (
       <div>
         <h1>Admin Page</h1>
-        <Link href="/" style={{color:'#fff', fontSize:"1.5rem", margin:"0 0 1rem", display:"block"}}>To Main Page</Link>
+        <Link href="/" style={{color:"#000",fontSize:"1.5rem", margin:"0 0 1rem", display:"block"}}>To Main Page</Link>
         
         <div className={styles.square}>
           <span className={styles.squareTitle}>Profile</span>
